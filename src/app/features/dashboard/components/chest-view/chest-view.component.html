@@ -1,1 +1,29 @@
-<p>chest-view works!</p>
+<div class="chest-stage">
+
+ <img
+  class="link"
+  src="assets/link/link-lift.png"
+  [class.show]="linkVisible()"
+ >
+
+ <div class="chest" [class.open]="opened()">
+
+  <div class="lid"></div>
+
+  <div class="particles" *ngIf="opened()">
+   <div class="particle" *ngFor="let p of [1,2,3,4,5]"></div>
+  </div>
+
+ </div>
+
+ <div class="result" *ngIf="result()">
+  ⭐{{result()?.nombre}}
+ </div>
+
+ <button class="summon" (click)="openChest()">ABRIR COFRE</button>
+
+</div>
+
+
+
+

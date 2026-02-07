@@ -1,0 +1,81 @@
+.council{
+ text-align:center;
+ padding:20px;
+}
+
+.summon{
+ background:black;
+ color:gold;
+ border:2px solid gold;
+ padding:10px 20px;
+ cursor:pointer;
+ font-weight:bold;
+ margin-bottom:20px;
+}
+
+.stage{
+ display:flex;
+ justify-content:center;
+ align-items:flex-end;
+ gap:120px;
+ min-height:320px;
+}
+
+.judge{
+ opacity:0;
+ text-align:center;
+ transform:translateX(0);
+}
+
+.judge.show{
+ opacity:1;
+}
+
+.judge img{
+ width:140px;
+ pointer-events:none;
+ user-select:none;
+}
+
+/* perso derecha */
+.perso.show{
+ animation:perso .6s forwards;
+}
+
+@keyframes perso{
+ from{transform:translateX(200px);}
+ to{transform:translateX(0);}
+}
+
+/* miku izquierda */
+.miku.show{
+ animation:miku .6s forwards;
+}
+
+@keyframes miku{
+ from{transform:translateX(-200px);}
+ to{transform:translateX(0);}
+}
+
+/* bobi fade */
+.bobi.show{
+ animation:bobi .6s forwards;
+}
+
+@keyframes bobi{
+ from{opacity:0;transform:scale(.6);}
+ to{opacity:1;transform:scale(1);}
+}
+
+.vote{
+ margin-top:10px;
+ color:white;
+ font-weight:bold;
+}
+
+.final{
+ margin-top:30px;
+ font-size:22px;
+ color:gold;
+ font-weight:bold;
+}

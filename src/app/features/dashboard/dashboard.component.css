@@ -1,13 +1,118 @@
-.casino{
- background:#0b0b0b;
- color:white;
- padding:25px;
- border:3px solid gold;
- border-radius:12px;
+/* =========================
+   HOST DEL DASHBOARD
+========================= */
+:host{
+ display:block;
+ position:relative;
+ z-index:1;
 }
 
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+.casino{
+ max-width:900px;
+ margin:auto;
+ padding:30px;
+
+ text-align:center;
+
+ background:#111;
+ border-radius:16px;
+
+ box-shadow:
+ 0 0 30px rgba(0,0,0,.6),
+ inset 0 0 20px rgba(255,215,0,.1);
+
+ color:white;
+}
+
+
+/* =========================
+   TITULO
+========================= */
+h1{
+ font-size:32px;
+ margin-bottom:25px;
+ color:gold;
+ text-shadow:0 0 12px rgba(255,215,0,.4);
+}
+
+
+/* =========================
+   BOTONES GENERALES
+========================= */
+button{
+ padding:10px 16px;
+ margin:6px;
+
+ border:none;
+ border-radius:8px;
+
+ background:#222;
+ color:white;
+
+ cursor:pointer;
+ transition:.25s;
+}
+
+button:hover{
+ transform:translateY(-2px);
+ background:#333;
+}
+
+
+/* =========================
+   BOTON PRINCIPAL SPIN
+========================= */
 .spin{
  background:gold;
  color:black;
- padding:10px;
+ font-weight:bold;
+ font-size:16px;
+
+ box-shadow:0 0 12px rgba(255,215,0,.5);
+}
+
+.spin:hover{
+ transform:scale(1.05);
+}
+
+
+/* =========================
+   FORMULARIO AGREGAR OUTFIT
+========================= */
+input,select{
+ padding:8px;
+ margin:10px 5px;
+
+ border-radius:6px;
+ border:none;
+
+ background:#1a1a1a;
+ color:white;
+}
+
+input::placeholder{
+ color:#aaa;
+}
+
+
+/* =========================
+   SEPARADOR
+========================= */
+hr{
+ margin:30px 0;
+ border:none;
+ height:1px;
+ background:rgba(255,255,255,.1);
+}
+.views{
+ position:relative;
+ min-height:420px;
+}
+
+.hidden{
+ display:none !important;
 }

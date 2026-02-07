@@ -1,25 +1,45 @@
-<div class="wheel-container">
+<div class="wheel-stage">
 
-<div class="pointer"></div>
+ <div class="wheel-container">
 
-<div
- class="wheel"
- [style.transform]="'rotate('+rotation()+'deg)'"
- [style.background]="gradient()">
+  <div class="pointer"></div>
 
-<div
- *ngFor="let opt of allOptions; let i=index"
- class="label"
- [style.transform]="'rotate('+(i*(360/allOptions.length))+'deg)'">
+  <div
+   class="wheel"
+   [style.transform]="'rotate('+rotation()+'deg)'"
+  >
 
-<span>{{opt.nombre}}</span>
+   <div
+    class="segment"
+    *ngFor="let s of segments; let i=index"
+    [style.transform]="'rotate('+s.rotate+'deg)'"
+   >
+
+    <div
+     class="slice"
+     [style.transform]="'skewY('+(90-s.slice)+'deg)'"
+    ></div>
+
+    <span class="label">
+     {{s.nombre}}
+    </span>
+
+   </div>
+
+  </div>
+
+ </div>
+
+ <button
+  class="spin-btn"
+  (click)="spin()"
+  [disabled]="spinning()"
+ >
+  🎰 GIRAR RULETA
+ </button>
+
+ <div class="result" *ngIf="result()">
+  🎯 {{result()?.nombre}}
+ </div>
 
 </div>
-
-</div>
-
-</div>
-
-<h2 *ngIf="result">
- 🎯 {{result.nombre}}
-</h2>

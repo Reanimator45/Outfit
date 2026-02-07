@@ -2,30 +2,41 @@
 
 <h1>🎰 Outfit Casino</h1>
 
-<button (click)="selectedWheel.set('R1')">L-M-M</button>
-<button (click)="selectedWheel.set('R2')">J-V</button>
+<button (click)="selectedWheel.set('R1')">L-M-V</button>
+<button (click)="selectedWheel.set('R2')">M-J</button>
 <button (click)="selectedWheel.set('R3')">S-D</button>
 
-<button class="spin" (click)="run()">DECIDIR</button>
+<!-- 👇 ahora solo cambia el modo -->
+<button class="spin" (click)="run()">Elegir Modo</button>
 
-<div *ngIf="mode()">
+<div class="view-container">
 
-<app-wheel-view
- *ngIf="mode()==='WHEEL'"
- [result]="result()"
- [spinning]="spinning()"
- [allOptions]="getOptions()"
->
-</app-wheel-view>
+  <ng-container [ngSwitch]="mode()">
 
-<app-chest-view *ngIf="mode()==='CHEST'" [result]="result()"/>
-<app-council-view *ngIf="mode()==='COUNCIL'" [result]="result()"/>
+    <app-wheel-view
+      *ngSwitchCase="'WHEEL'"
+      [options]="getOptions()">
+    </app-wheel-view>
+
+    <app-chest-view
+      *ngSwitchCase="'CHEST'"
+      [options]="getOptions()">
+    </app-chest-view>
+
+    <app-council-view
+      *ngSwitchCase="'COUNCIL'"
+      [options]="getOptions()">
+    </app-council-view>
+
+  </ng-container>
 
 </div>
+
 
 <hr>
 
 <input #nombre placeholder="Categoría">
+
 <select #wheel>
 <option value="R1">R1</option>
 <option value="R2">R2</option>
@@ -35,4 +46,3 @@
 <button (click)="add(nombre.value,wheel.value)">Agregar</button>
 
 </div>
-

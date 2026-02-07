@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,72 +6,58 @@ import { CommonModule } from '@angular/common';
  standalone:true,
  imports:[CommonModule],
  templateUrl:'./wheel-view.component.html',
- styleUrl:'./wheel-view.component.css'
+ styleUrls:['./wheel-view.component.css']
 })
-export class WheelViewComponent implements OnChanges{
+export class WheelViewComponent{
 
- @Input() result:any;
- @Input() allOptions:any[]=[];
- @Input() spinning=false;
+ @Input() options:any[]=[];
 
- rotation=signal(0);
- gradient=signal('');
+ rotation = signal(0);
+ spinning = signal(false);
+ result = signal<any>(null);
 
- ngOnChanges(changes:SimpleChanges){
+ get segments(){
 
-   this.buildGradient();
+  if(!this.options?.length) return [];
 
-   if(changes['result'] && this.result){
+  const slice = 360 / this.options.length;
 
-     const index=this.allOptions
-       .findIndex(o=>o.id===this.result.id);
+  return this.options.map((o,i)=>({
+   ...o,
+   rotate:i*slice,
+   slice
+  }));
 
-     if(index===-1) return;
-
-     const segment=360/this.allOptions.length;
-
-     const targetAngle=(index*segment)+(segment/2);
-
-     const spins=1440; // 4 vueltas completas
-
-     const finalRotation=spins + (360-targetAngle);
-
-     this.rotation.set(finalRotation);
-
-   }
-   if(this.spinning && !this.result){
-
- const freeSpin=720 + Math.floor(Math.random()*360);
-
- this.rotation.set(freeSpin);
-
- return;
-
-}
  }
 
- buildGradient(){
+ spin(){
 
- if(!this.allOptions.length) return;
+  if(this.spinning() || !this.options.length) return;
 
- const step=360/this.allOptions.length;
+  this.spinning.set(true);
+  this.result.set(null);
 
- let current=0;
- let parts:string[]=[];
+  const count=this.options.length;
+  const slice=360/count;
 
- this.allOptions.forEach((_,i)=>{
+  const index=Math.floor(Math.random()*count);
+  const chosen=this.options[index];
 
-   const color=i%2===0?'#1e1e1e':'#444';
+  const center=index*slice+slice/2;
 
-   parts.push(`${color} ${current}deg ${current+step}deg`);
+  const pointerAngle=270;
 
-   current+=step;
+  const neededRotation=pointerAngle-center;
 
- });
+  const extraSpins=5*360;
 
- this.gradient.set(`conic-gradient(${parts.join(',')})`);
+  this.rotation.update(r=>r+extraSpins+neededRotation);
 
-}
+  setTimeout(()=>{
+   this.result.set(chosen);
+   this.spinning.set(false);
+  },4200);
 
+ }
 
 }
