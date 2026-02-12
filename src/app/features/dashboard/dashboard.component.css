@@ -1,118 +1,164 @@
-/* =========================
-   HOST DEL DASHBOARD
-========================= */
 :host{
- display:block;
- position:relative;
- z-index:1;
+  display:block;
+  min-height:100vh;
+  background:#000;
+  color:white;
+  font-family:system-ui;
 }
 
-
 /* =========================
-   CONTENEDOR PRINCIPAL
+   CONTENEDOR
 ========================= */
 .casino{
- max-width:900px;
- margin:auto;
- padding:30px;
-
- text-align:center;
-
- background:#111;
- border-radius:16px;
-
- box-shadow:
- 0 0 30px rgba(0,0,0,.6),
- inset 0 0 20px rgba(255,215,0,.1);
-
- color:white;
+  max-width:1100px;
+  margin:auto;
+  padding:40px;
+  text-align:center;
 }
 
-
 /* =========================
-   TITULO
+   SELECTOR RULETA
 ========================= */
-h1{
- font-size:32px;
- margin-bottom:25px;
- color:gold;
- text-shadow:0 0 12px rgba(255,215,0,.4);
+.wheel-select{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:20px;
 }
 
+.wheel-select button{
+  padding:10px 18px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#111;
+  color:white;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.wheel-select button.active{
+  background:gold;
+  color:black;
+  box-shadow:0 0 12px gold;
+}
 
 /* =========================
-   BOTONES GENERALES
+   ACCIONES
 ========================= */
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
 button{
- padding:10px 16px;
- margin:6px;
-
- border:none;
- border-radius:8px;
-
- background:#222;
- color:white;
-
- cursor:pointer;
- transition:.25s;
+  padding:10px 18px;
+  border-radius:12px;
+  border:none;
+  background:#222;
+  color:white;
+  cursor:pointer;
+  transition:.2s;
 }
 
 button:hover{
- transform:translateY(-2px);
- background:#333;
+  transform:translateY(-2px);
+  background:#333;
 }
 
-
-/* =========================
-   BOTON PRINCIPAL SPIN
-========================= */
 .spin{
- background:gold;
- color:black;
- font-weight:bold;
- font-size:16px;
-
- box-shadow:0 0 12px rgba(255,215,0,.5);
+  background:gold;
+  color:black;
+  font-weight:bold;
 }
-
-.spin:hover{
- transform:scale(1.05);
-}
-
 
 /* =========================
-   FORMULARIO AGREGAR OUTFIT
+   LISTA ESTILOS
 ========================= */
-input,select{
- padding:8px;
- margin:10px 5px;
-
- border-radius:6px;
- border:none;
-
- background:#1a1a1a;
- color:white;
+.style-list{
+  margin:20px auto;
+  max-width:420px;
+  background:#0c0c0c;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 0 20px rgba(0,0,0,.6);
 }
 
-input::placeholder{
- color:#aaa;
+.style-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  border-bottom:1px solid #1f1f1f;
 }
 
+.style-item:last-child{
+  border-bottom:none;
+}
 
 /* =========================
-   SEPARADOR
+   INPUT / ADD
 ========================= */
-hr{
- margin:30px 0;
- border:none;
- height:1px;
- background:rgba(255,255,255,.1);
-}
-.views{
- position:relative;
- min-height:420px;
+.add-style{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
 }
 
-.hidden{
- display:none !important;
+.add-style input{
+  flex:1;
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #333;
+  background:#111;
+  color:white;
+}
+
+/* =========================
+   ICON BUTTON
+========================= */
+.icon-btn{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#181818;
+  font-size:18px;
+}
+
+.icon-btn:hover{
+  background:#252525;
+  transform:scale(1.1);
+}
+
+/* =========================
+   TOAST
+========================= */
+.toast{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  border:1px solid gold;
+  color:gold;
+  padding:14px 20px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(255,215,0,.3);
+  z-index:999;
+  animation:toastIn .3s ease;
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translate(-50%,20px);
+  }
+  to{
+    opacity:1;
+    transform:translate(-50%,0);
+  }
 }

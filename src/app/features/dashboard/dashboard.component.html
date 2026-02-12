@@ -1,48 +1,101 @@
 <div class="casino">
 
-<h1>🎰 Outfit Casino</h1>
+  <h1>🎰 Outfit Casino</h1>
 
-<button (click)="selectedWheel.set('R1')">L-M-V</button>
-<button (click)="selectedWheel.set('R2')">M-J</button>
-<button (click)="selectedWheel.set('R3')">S-D</button>
+  <!-- BOTÓN JUGAR -->
+  <button
+    class="play-btn"
+    *ngIf="!playing()"
+    (click)="play()">
+    🎮 JUGAR
+  </button>
 
-<!-- 👇 ahora solo cambia el modo -->
-<button class="spin" (click)="run()">Elegir Modo</button>
+  <div *ngIf="playing()">
 
-<div class="view-container">
+    <!-- SELECTORES RULETA -->
+    <div class="wheel-select">
+      <button
+        [class.active]="selectedWheel()==='LMV'"
+        (click)="selectWheel('LMV')">
+        🎯 L-M-V
+      </button>
 
-  <ng-container [ngSwitch]="mode()">
+      <button
+        [class.active]="selectedWheel()==='MJ'"
+        (click)="selectWheel('MJ')">
+        🎯 M-J
+      </button>
 
-    <app-wheel-view
-      *ngSwitchCase="'WHEEL'"
-      [options]="getOptions()">
-    </app-wheel-view>
+      <button
+        [class.active]="selectedWheel()==='SD'"
+        (click)="selectWheel('SD')">
+        🎯 S-D
+      </button>
+    </div>
 
-    <app-chest-view
-      *ngSwitchCase="'CHEST'"
-      [options]="getOptions()">
-    </app-chest-view>
+    <!-- ACCIONES -->
+    <div class="actions">
+      <button class="spin" (click)="run()">
+        🎰 MODULO
+      </button>
 
-    <app-council-view
-      *ngSwitchCase="'COUNCIL'"
-      [options]="getOptions()">
-    </app-council-view>
+      <button class="list" (click)="toggleList()">
+        📋 LISTA DE ESTILOS
+      </button>
+    </div>
 
-  </ng-container>
+    <!-- LISTA DE ESTILOS (FILTRADA POR RULETA ACTIVA) -->
+    <div class="style-list" *ngIf="showList() && selectedWheel()">
+
+      <h3>🎯 Estilos {{selectedWheel()}}</h3>
+
+      <div
+        class="style-item"
+        *ngFor="let s of getOptions()">
+
+        <span>👗 {{s.nombre}}</span>
+
+        <button class="icon-btn" (click)="remove(s.id)">
+          🗑️
+        </button>
+      </div>
+
+      <div class="add-style">
+        <input #nombre placeholder="Nuevo estilo">
+        <button class="icon-btn" (click)="add(nombre.value)">
+          ➕
+        </button>
+      </div>
+
+    </div>
+
+    <!-- MÓDULOS -->
+    <div class="view-container">
+      <ng-container [ngSwitch]="mode()">
+
+        <app-wheel-view
+          *ngSwitchCase="'WHEEL'"
+          [options]="getOptions()">
+        </app-wheel-view>
+
+        <app-chest-view
+          *ngSwitchCase="'CHEST'"
+          [options]="getOptions()">
+        </app-chest-view>
+
+        <app-council-view
+          *ngSwitchCase="'COUNCIL'"
+          [options]="getOptions()">
+        </app-council-view>
+
+      </ng-container>
+    </div>
+
+  </div>
 
 </div>
 
-
-<hr>
-
-<input #nombre placeholder="Categoría">
-
-<select #wheel>
-<option value="R1">R1</option>
-<option value="R2">R2</option>
-<option value="R3">R3</option>
-</select>
-
-<button (click)="add(nombre.value,wheel.value)">Agregar</button>
-
+<!-- TOAST -->
+<div class="toast" *ngIf="toast()">
+  {{toast()}}
 </div>

@@ -1,4 +1,6 @@
 import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { DbService } from '../../core/services/db.service';
 import { DecisionEngineService, Mode } from '../../core/services/decision-engine.service';
 
@@ -6,71 +8,94 @@ import { WheelViewComponent } from './components/wheel-view/wheel-view.component
 import { ChestViewComponent } from './components/chest-view/chest-view.component';
 import { CouncilViewComponent } from './components/council-view/council-view.component';
 
-import { CommonModule } from '@angular/common';
-
 @Component({
- selector:'app-dashboard',
- standalone:true,
- imports:[
-  CommonModule,
-  WheelViewComponent,
-  ChestViewComponent,
-  CouncilViewComponent
- ],
- templateUrl:'./dashboard.component.html',
- styleUrl:'./dashboard.component.css'
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [
+    CommonModule,
+    WheelViewComponent,
+    ChestViewComponent,
+    CouncilViewComponent
+  ],
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent{
+export class DashboardComponent {
 
- selectedWheel = signal<'R1'|'R2'|'R3'|null>(null);
+  playing = signal(false);
+  showList = signal(false);
 
- mode = signal<Mode|null>(null);
+  selectedWheel = signal<'LMV' | 'MJ' | 'SD' | null>(null);
+  mode = signal<Mode | null>(null);
 
- constructor(
-  public db:DbService,
-  private decision:DecisionEngineService
- ){}
+  toast = signal<string | null>(null);
 
- run(){
+  constructor(
+    public db: DbService,
+    private decision: DecisionEngineService
+  ) {}
 
-  const wheel = this.selectedWheel();
+  /* =========================
+     FLOW
+  ========================= */
 
-  if(!wheel) return;
-
-  const filtered = this.db.outfits()
-    .filter(o=>o.wheel===wheel);
-
-  if(filtered.length===0){
-    alert('No hay categorías');
-    return;
+  play() {
+    this.playing.set(true);
   }
 
-  // 🎭 solo elegimos el modo visual
-  this.mode.set(this.decision.randomMode());
+  selectWheel(w: 'LMV' | 'MJ' | 'SD') {
+    this.selectedWheel.set(w);
+    this.mode.set(null);
+  }
 
- }
+  run() {
+    if (!this.selectedWheel()) return;
+    this.mode.set(this.decision.randomMode());
+  }
 
- add(nombre:string,wheel:any){
+  toggleList() {
+    this.showList.update(v => !v);
+  }
 
-  if(!nombre) return;
+  /* =========================
+     CRUD ESTILOS
+  ========================= */
 
-  this.db.add({
-    id:Date.now(),
-    nombre,
-    wheel
-  });
+  add(nombre: string) {
+    const wheel = this.selectedWheel();
+    if (!nombre || !wheel) return;
 
- }
+    this.db.add({
+      id: Date.now(),
+      nombre,
+      wheel
+    });
 
- getOptions(){
+    this.showToast('➕ Estilo agregado');
+  }
 
-  const wheel=this.selectedWheel();
+  remove(id: number) {
+    this.db.remove(id);
+    this.showToast('🗑️ Estilo eliminado');
+  }
 
-  if(!wheel) return [];
+  /* =========================
+     DATA
+  ========================= */
 
-  return this.db.outfits()
-    .filter(o=>o.wheel===wheel);
+  getOptions() {
+    const wheel = this.selectedWheel();
+    if (!wheel) return [];
 
- }
+    return this.db.outfits().filter(o => o.wheel === wheel);
+  }
 
+  /* =========================
+     TOAST
+  ========================= */
+
+  showToast(msg: string) {
+    this.toast.set(msg);
+    setTimeout(() => this.toast.set(null), 2500);
+  }
 }

@@ -27,8 +27,22 @@ export class CouncilViewComponent {
 
   winner = signal<any>(null);
   voting = signal(false);
+  uses = signal(0);
+noCouncil = signal(false);
+
 
   startCouncil() {
+
+
+    this.uses.update(v=>v+1);
+
+if(this.uses()>3){
+
+ this.noCouncil.set(true);
+ this.winner.set({nombre:'🚫 Justo hoy dejamos de decidir'});
+ return;
+
+}
 
     if (!this.options.length) return;
 

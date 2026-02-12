@@ -21,6 +21,12 @@ export class DbService{
    const data=[...this.outfits(),outfit];
    this.save(data);
  }
+remove(id:number){
 
+ this.outfits.update(list =>
+  list.filter(o=>o.id!==id)
+ );
+
+}
 }
 

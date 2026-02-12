@@ -10,10 +10,12 @@
   >
 
    <div
-    class="segment"
-    *ngFor="let s of segments; let i=index"
-    [style.transform]="'rotate('+s.rotate+'deg)'"
-   >
+ class="segment"
+ *ngFor="let s of segments; let i=index"
+ [class.winner]="winnerIndex()===i"
+ [style.transform]="'rotate('+s.rotate+'deg)'"
+>
+
 
     <div
      class="slice"
@@ -39,7 +41,10 @@
  </button>
 
  <div class="result" *ngIf="result()">
-  🎯 {{result()?.nombre}}
+  LA RULETA CAE EN 🎯 {{result()?.nombre}}
  </div>
+<div class="toast" *ngIf="toast()">
+ {{toast()}}
+</div>
 
 </div>

@@ -14,11 +14,30 @@ export class ChestViewComponent{
 
  opened = signal(false);
  result = signal<any>(null);
+ uses = signal(0);
  linkVisible = signal(false);
 
  private audio = new Audio('assets/sounds/fanfare.mp3');
 
  openChest(){
+
+
+     this.uses.update(v=>v+1);
+
+ this.opened.set(false);
+ this.result.set(null);
+
+ if(this.uses()>3){
+
+  setTimeout(()=>{
+   this.opened.set(true);
+   this.result.set({nombre:' NADA ⭐'});
+  },1200);
+
+  return;
+ }
+
+ 
 
   if(!this.options.length)return;
 

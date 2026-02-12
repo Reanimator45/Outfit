@@ -15,6 +15,8 @@ export class WheelViewComponent{
  rotation = signal(0);
  spinning = signal(false);
  result = signal<any>(null);
+ winnerIndex = signal<number | null>(null);
+
 
  get segments(){
 
@@ -29,35 +31,73 @@ export class WheelViewComponent{
   }));
 
  }
+ toast = signal<string|null>(null);
+uses = signal(0);
+toastCount = signal(0);
 
- spin(){
 
-  if(this.spinning() || !this.options.length) return;
 
-  this.spinning.set(true);
-  this.result.set(null);
+spin(){
 
-  const count=this.options.length;
-  const slice=360/count;
+ if(this.spinning()) return;
 
-  const index=Math.floor(Math.random()*count);
-  const chosen=this.options[index];
+ this.uses.update(v=>v+1);
 
-  const center=index*slice+slice/2;
+ if(this.uses()>3){
 
-  const pointerAngle=270;
+  this.toastCount.update(v=>v+1);
 
-  const neededRotation=pointerAngle-center;
+  if(this.toastCount()>=3){
+   this.toast.set('⚠️ Por insistente ahora me debes fotobuba :p');
+  }else{
+   this.toast.set('🎭 La suerte se agotó... intenta mañana 😉');
+  }
 
-  const extraSpins=5*360;
-
-  this.rotation.update(r=>r+extraSpins+neededRotation);
-
-  setTimeout(()=>{
-   this.result.set(chosen);
-   this.spinning.set(false);
-  },4200);
-
+  setTimeout(()=>this.toast.set(null),3500);
+  return;
  }
+
+ if(!this.options.length) return;
+
+ this.winnerIndex.set(null);
+
+ this.spinning.set(true);
+ this.result.set(null);
+
+ const slice = 360 / this.options.length;
+
+ const winnerIndex =
+  Math.floor(Math.random()*this.options.length);
+
+ /* 🔥 OFFSET REAL PARA RULETA SKEW */
+ const pointerOffset = -90;
+this.winnerIndex.set(winnerIndex);
+
+ const targetAngle =
+  pointerOffset
+  - (winnerIndex*slice)
+  - (slice/2);
+
+ const currentAngle =
+  this.rotation()%360;
+
+ const finalRotation =
+  this.rotation()
+  + 5*360
+  + (targetAngle-currentAngle);
+
+ this.rotation.set(finalRotation);
+
+ setTimeout(()=>{
+  this.result.set(this.options[winnerIndex]);
+  this.spinning.set(false);
+ },4000);
+
+}
+
+
+
+
+
 
 }

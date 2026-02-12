@@ -41,12 +41,19 @@
 }
 
 .slice{
+
  position:absolute;
  width:100%;
  height:100%;
+
  background:#1a1a1a;
- border-right:2px solid gold;
+
+ /* divisor REAL */
+ border-left:2px solid rgba(255,215,0,.8);
+
  transform-origin:0% 0%;
+
+ box-sizing:border-box;
 }
 
 .segment:nth-child(even) .slice{
@@ -54,15 +61,30 @@
 }
 
 .label{
+
  position:absolute;
- left:18px;
- top:8px;
+
+ top:50%;
+ left:50%;
+
+ transform:
+  rotate(90deg)
+  translateY(-50%)
+  translateX(18px);
+
+ transform-origin:left center;
+
  color:white;
  font-size:12px;
  font-weight:bold;
- transform:rotate(90deg);
+
  white-space:nowrap;
+
+ text-shadow:
+ 0 0 4px rgba(0,0,0,.7),
+ 0 0 8px rgba(0,0,0,.4);
 }
+
 
 .spin-btn{
  margin-top:20px;
@@ -81,3 +103,93 @@
  color:gold;
  font-weight:bold;
 }
+
+.toast{
+ position:fixed;
+ bottom:40px;
+ left:50%;
+ transform:translateX(-50%) scale(.9);
+
+ background:linear-gradient(45deg,#111,#000);
+ border:2px solid gold;
+ color:gold;
+
+ padding:14px 24px;
+ border-radius:12px;
+
+ font-size:16px;
+ font-weight:bold;
+ letter-spacing:.5px;
+
+ box-shadow:
+ 0 0 15px rgba(255,215,0,.4),
+ 0 0 30px rgba(255,215,0,.2);
+
+ animation:toastEnter .35s ease forwards;
+ z-index:9999;
+}
+
+@keyframes toastEnter{
+ from{
+  opacity:0;
+  transform:translateX(-50%) translateY(20px) scale(.8);
+ }
+ to{
+  opacity:1;
+  transform:translateX(-50%) translateY(0) scale(1);
+ }
+}
+.toast::before{
+ content:'🎰';
+ margin-right:8px;
+}
+/* =========================
+   SECTOR GANADOR
+========================= */
+.segment.winner .slice{
+
+ background:linear-gradient(
+ 145deg,
+ #ffd700,
+ #ffb700,
+ #ffd700
+ );
+
+ box-shadow:
+ inset 0 0 25px rgba(255,215,0,.9),
+ inset 0 0 40px rgba(255,215,0,.6),
+ 0 0 25px rgba(255,215,0,.7);
+
+ animation:winnerGlow 1s infinite alternate;
+}
+
+/* LABEL GANADOR */
+.segment.winner .label{
+ color:#000;
+ text-shadow:
+ 0 0 10px gold,
+ 0 0 20px gold;
+}
+
+/* PULSO */
+@keyframes winnerGlow{
+ from{
+  filter:brightness(1);
+ }
+ to{
+  filter:brightness(1.3);
+ }
+}
+.segment:first-child .slice{
+ border-left:2px solid rgba(255,215,0,.8);
+}
+.slice::before{
+ content:'';
+ position:absolute;
+ top:0;
+ left:0;
+ width:2px;
+ height:100%;
+ background:gold;
+}
+

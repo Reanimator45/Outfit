@@ -8,17 +8,17 @@
 
 <div class="judge perso" [class.show]="judges()[0].visible">
 <img [src]="judges()[0].image">
-<div class="vote">{{judges()[0].vote?.nombre}}</div>
+<div class="vote">{{noCouncil() ? '❌' :judges()[0].vote?.nombre}}</div>
 </div>
 
 <div class="judge miku" [class.show]="judges()[1].visible">
 <img [src]="judges()[1].image">
-<div class="vote">{{judges()[1].vote?.nombre}}</div>
+<div class="vote">{{noCouncil() ? '❌' :judges()[1].vote?.nombre}}</div>
 </div>
 
 <div class="judge bobi" [class.show]="judges()[2].visible">
 <img [src]="judges()[2].image">
-<div class="vote">{{judges()[2].vote?.nombre}}</div>
+<div class="vote">{{noCouncil() ? '❌' :judges()[2].vote?.nombre}}</div>
 </div>
 
 </div>
@@ -26,6 +26,10 @@
 <div class="final" *ngIf="winner()">
 ⚖️ DECISIÓN FINAL:
 <strong>{{winner()?.nombre}}</strong>
+</div>
+
+<div class="no-council" *ngIf="noCouncil()">
+ ⚖️ Los jueces decidieron no decidir hoy...
 </div>
 
 </div>
