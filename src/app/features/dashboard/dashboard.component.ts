@@ -7,6 +7,7 @@ import { DecisionEngineService, Mode } from '../../core/services/decision-engine
 import { WheelViewComponent } from './components/wheel-view/wheel-view.component';
 import { ChestViewComponent } from './components/chest-view/chest-view.component';
 import { CouncilViewComponent } from './components/council-view/council-view.component';
+import { CardsViewComponent } from './components/cards-view/cards-view.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,8 @@ import { CouncilViewComponent } from './components/council-view/council-view.com
     CommonModule,
     WheelViewComponent,
     ChestViewComponent,
-    CouncilViewComponent
+    CouncilViewComponent,
+    CardsViewComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

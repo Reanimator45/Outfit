@@ -1,0 +1,35 @@
+<div class="cards-stage">
+
+ <button class="draw-btn" (click)="generateCards()">
+  🃏 ROBAR CARTAS
+ </button>
+
+ <div class="cards-container">
+
+  <div
+   class="card"
+   #cardEl
+   *ngFor="let card of cards()"
+   [attr.data-rareza]="card.rareza"
+  >
+
+   <div class="card-face front">
+    ✨
+   </div>
+
+   <div class="card-face back" [ngClass]="card.rareza">
+    {{card.nombre}}
+    <div class="rareza">
+     {{card.rareza}}
+    </div>
+   </div>
+
+  </div>
+
+ </div>
+
+ <div class="winner" *ngIf="winner()">
+  🏆 GANA: {{winner()?.nombre}} ({{winner()?.rareza}})
+ </div>
+
+</div>

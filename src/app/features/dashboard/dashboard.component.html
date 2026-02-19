@@ -88,6 +88,11 @@
           [options]="getOptions()">
         </app-council-view>
 
+        <app-cards-view
+ *ngSwitchCase="'CARDS'"
+ [options]="getOptions()">
+</app-cards-view>
+
       </ng-container>
     </div>
 

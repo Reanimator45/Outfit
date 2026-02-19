@@ -1,0 +1,122 @@
+.cards-stage{
+ text-align:center;
+ margin-top:40px;
+}
+
+.draw-btn{
+ padding:14px 28px;
+ background:linear-gradient(45deg,#ffd700,#ff9900);
+ border:none;
+ border-radius:14px;
+ font-weight:bold;
+ cursor:pointer;
+ margin-bottom:30px;
+ box-shadow:0 0 20px rgba(255,215,0,.4);
+}
+
+.cards-container{
+ display:flex;
+ justify-content:center;
+ gap:20px;
+ perspective:1000px;
+}
+
+.card{
+ width:150px;
+ height:220px;
+ position:relative;
+ transform-style:preserve-3d;
+ transition:transform .6s;
+}
+
+.card-face{
+ position:absolute;
+ width:100%;
+ height:100%;
+ border-radius:16px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ backface-visibility:hidden;
+ font-weight:bold;
+}
+
+.front{
+ background:linear-gradient(135deg,#111,#000);
+ border:2px solid gold;
+ color:gold;
+ font-size:40px;
+}
+
+.back{
+ transform:rotateY(180deg);
+ font-size:18px;
+ padding:10px;
+ text-align:center;
+}
+
+.back.normal{
+ background:#222;
+ color:white;
+}
+
+.back.rara{
+ background:linear-gradient(135deg,#4b0082,#8000ff);
+ color:white;
+ box-shadow:0 0 20px #8000ff;
+}
+
+.back.legendaria{
+ background:linear-gradient(135deg,gold,#ffcc00);
+ color:black;
+ box-shadow:0 0 30px gold;
+}
+
+.rareza{
+ margin-top:8px;
+ font-size:12px;
+ opacity:.7;
+ text-transform:uppercase;
+}
+
+.winner{
+ margin-top:30px;
+ font-size:22px;
+ color:gold;
+ font-weight:bold;
+ animation:pulse 1s infinite alternate;
+}
+
+@keyframes pulse{
+ from{opacity:.6;}
+ to{opacity:1;}
+}
+.bonus-pop{
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ color:gold;
+ font-size:22px;
+ font-weight:bold;
+ pointer-events:none;
+ text-shadow:
+ 0 0 10px gold,
+ 0 0 20px orange;
+}
+
+.duel-text{
+ position:fixed;
+ top:50%;
+ left:50%;
+ transform:translate(-50%,-50%);
+ font-size:40px;
+ font-weight:bold;
+ color:gold;
+ text-shadow:
+ 0 0 20px gold,
+ 0 0 40px orange;
+ z-index:9999;
+ pointer-events:none;
+}
