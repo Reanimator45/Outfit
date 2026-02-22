@@ -93,6 +93,11 @@
  [options]="getOptions()">
 </app-cards-view>
 
+        <app-slot-view
+          *ngSwitchCase="'SLOT'"
+          [options]="getOptions()">
+        </app-slot-view>
+
       </ng-container>
     </div>
 

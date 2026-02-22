@@ -1,0 +1,70 @@
+<div class="slot-wrapper">
+  
+<div class="symbol-legend">
+
+    <div
+  *ngFor="let s of currentFourStyles"
+  class="legend-item"
+  [class.winner]="isWinner(s.id)"
+>
+  <img [src]="s.img">
+  <span>{{s.label | uppercase}}</span>
+</div>
+
+    <div class="legend-divider"></div>
+
+    <div class="legend-item" *ngFor="let s of specialSymbols">
+      <img [src]="s.img">
+      <span>{{s.type | uppercase}}</span>
+    </div>
+
+  </div>
+  <div class="machine">
+
+    <div class="center-line"></div>
+
+    <div class="reels">
+      <div class="reel" *ngFor="let reel of reels">
+        <div class="reel-track">
+          <div class="symbol" *ngFor="let s of reel">
+            <img [src]="s.img">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PALANCA -->
+    <div class="lever-container">
+      <div class="lever" (click)="spin()" [class.active]="spinning()"></div>
+      <div class="lever-ball"></div>
+    </div>
+
+  </div>
+
+  <!-- EVENTO -->
+  <div class="event-overlay" *ngIf="activeEvent() as ev">
+    <div class="jackpot-title">JACKPOT!</div>
+    
+  </div>
+
+  <div class="toast" *ngIf="toast()">
+    {{toast()}}
+  </div>
+
+  <div class="slot-layout">
+
+  
+
+</div>
+
+  <!-- 🔥 BOTONES DE TEST (BORRAR LUEGO) -->
+  
+
+</div>
+
+<div class="test-buttons">
+    <button (click)="testEvent('bobi')">Test Bobi</button>
+    <button (click)="testEvent('miku')">Test Miku</button>
+    <button (click)="testEvent('perso')">Test Perso</button>
+    <button (click)="testEvent('tortuga')">Test Tortuga</button>
+  </div>

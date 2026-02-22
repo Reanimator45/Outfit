@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+.global-event-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(5px);
+  z-index:9999;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.global-speech{
+  position:fixed;
+  top:35%;
+  left:50%;
+  transform:translateX(-50%);
+  background:black;
+  color:white;
+  padding:14px 22px;
+  border-radius:20px;
+  font-weight:bold;
+  z-index:10000;
+}

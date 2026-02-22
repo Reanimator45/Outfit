@@ -1,0 +1,239 @@
+.slot-wrapper{
+  position:relative;
+  max-width:800px;
+  margin:auto;
+}
+
+.machine{
+  position:relative;
+  background:#111;
+  border:10px solid gold;
+  border-radius:30px;
+  padding:40px;
+  box-shadow:0 0 50px gold;
+}
+
+
+
+.reels{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.reel{
+  width:120px;
+  height:120px;
+  overflow:hidden;
+  border-radius:15px;
+  border:3px solid #333;
+  background:black;
+}
+
+.reel-track{
+  display:flex;
+  flex-direction:column;
+}
+
+.symbol{
+  width:120px;
+  height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.symbol img{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+}
+
+/* PALANCA */
+.lever-container{
+  position:absolute;
+  right:-60px;
+  top:60px;
+}
+
+.lever{
+  width:12px;
+  height:130px;
+  background:silver;
+  border-radius:6px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.lever.active{
+  transform:rotate(25deg);
+}
+
+.lever-ball{
+  width:30px;
+  height:30px;
+  background:red;
+  border-radius:50%;
+  margin-left:-9px;
+}
+
+/* EVENTO */
+.event-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.jackpot-title{
+  font-size:50px;
+  color:gold;
+  margin-bottom:20px;
+}
+
+.event-img{
+  width:300px;
+}
+
+/* TOAST */
+.toast{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  border:2px solid gold;
+  padding:12px 20px;
+  border-radius:12px;
+  color:gold;
+}
+
+/* TEST */
+.test-buttons{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+}
+/* ===============================
+   WRAPPER GENERAL
+================================= */
+
+.slot-wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap:40px;
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+}
+
+/* ===============================
+   SLOT CENTRADO
+================================= */
+
+.slot-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* ===============================
+   LISTA IZQUIERDA
+================================= */
+
+.legend{
+  width:220px;
+  background:#111;
+  padding:18px;
+  border-radius:16px;
+  border:1px solid #222;
+  box-shadow:0 0 20px rgba(0,0,0,.6);
+}
+
+.legend h3{
+  font-size:16px;
+  margin-bottom:14px;
+  color:gold;
+  text-align:center;
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+  padding:6px;
+  border-radius:10px;
+  background:#1a1a1a;
+}
+
+.legend-item img{
+  width:40px;
+  height:40px;
+  object-fit:contain;
+}
+.legend-item.winner{
+  border:2px solid gold;
+  box-shadow:0 0 12px gold;
+  transform:scale(1.05);
+}
+
+.event-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(4px);
+  z-index:50;
+  overflow:hidden;
+  opacity:0;
+  pointer-events:none;
+}
+
+.speech-bubble{
+  position:absolute;
+  top:30%;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  padding:12px 18px;
+  border-radius:20px;
+  font-weight:bold;
+  z-index:60;
+}
+
+.big-event{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:300px;
+  z-index:30;
+}
+
+.floating{
+  position:absolute;
+  width:80px;
+}
+
+.emoji-rain{
+  position:absolute;
+  font-size:40px;
+}
+
+.speech{
+  position:absolute;
+  top:40%;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  padding:10px 16px;
+  border-radius:20px;
+  font-weight:bold;
+}
